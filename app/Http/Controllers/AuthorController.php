@@ -8,7 +8,10 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::withCount('books')->get();
-        return view('authors.index', compact('authors'));
+        $authors = Author::withCount('books')->get(['id', 'name', 'email']);
+        return response()->json([
+            'status' => 'success',
+            'data' => $authors
+        ]);
     }
 }
